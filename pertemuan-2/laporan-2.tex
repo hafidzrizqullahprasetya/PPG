@@ -38,17 +38,17 @@
 % PENGATURAN BLOK KODE (LISTINGS)
 %======================================================================
 \lstdefinestyle{commonstyle}{
-    backgroundcolor=\color{backcolour}, 
-    breakatwhitespace=false, 
-    breaklines=true, 
-    captionpos=b, 
+    backgroundcolor=\color{backcolour},
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
     keepspaces=true,
-    numbers=left, 
-    numbersep=5pt, 
-    showspaces=false, 
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
     showstringspaces=false,
-    showtabs=false, 
-    tabsize=2, 
+    showtabs=false,
+    tabsize=2,
     frame=single,
     basicstyle=\ttfamily\footnotesize,
     numberstyle=\tiny\color{codegray},
@@ -69,13 +69,13 @@
 \renewcommand{\figurename}{Gambar}
 \renewcommand{\thefigure}{\arabic{figure}}
 \hypersetup{
-    colorlinks=true, 
-    linkcolor=black, 
-    filecolor=black, 
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=black,
     urlcolor=black,
     citecolor=black,
-    pdftitle={Laporan Praktikum PPG Pertemuan 2}, 
-    pdfpagemode=UseOutlines, 
+    pdftitle={Laporan Praktikum PPG Pertemuan 2},
+    pdfpagemode=UseOutlines,
     breaklinks=true
 }
 \pagestyle{fancy}
@@ -167,7 +167,7 @@
 
 \chapter[Tujuan Praktikum]{Tujuan Praktikum}
 \begin{enumerate}
-   \item Mahasiswa mampu memahami konsep dasar Unreal Engine 5.8 sebagai engine real-time lintas platform yang dikembangkan oleh Epic Games serta model lisensinya \cite{epic-unreal}.
+   \item Mahasiswa mampu memahami konsep dasar Unreal Engine 5.8 sebagai engine real-time lintas platform dari Epic Games beserta model lisensinya \cite{epic-unreal}.
    \item Mahasiswa mampu mengoperasikan Epic Games Launcher untuk manajemen instalasi engine dan project, termasuk penanganan warning file \texttt{.uproject} dan akses Library \cite{modul2}.
    \item Mahasiswa mampu menavigasi antarmuka editor Unreal Engine 5.8 yang meliputi Outliner, Details, Viewport, Content Drawer, dan Top Bar, serta memahami fungsi navigasi dasar seperti PLAY, STOP, dan transformasi objek \cite{modul2}.
    \item Mahasiswa mampu melakukan manipulasi objek dan material, pengaturan collision dan physics, pencahayaan Point Light, sistem particle Niagara, Sequencer, serta logika Blueprint dan penyimpanan project sesuai alur praktikum \cite{epic-variants}.
@@ -177,241 +177,124 @@
 \chapter{Dasar Teori}
 
 \section{Unreal Engine dan Ekosistem Epic Games}
-Unreal Engine dikembangkan oleh Epic Games, perusahaan yang juga dikenal sebagai pembuat Fortnite. Engine ini tidak hanya digunakan untuk pengembangan game, tetapi juga di industri film, arsitektur, otomotif, dan simulasi yang membutuhkan visual berkualitas tinggi dengan performa real-time \cite{modul2,epic-unreal}. Saya memahami bahwa Unreal Engine menyediakan fitur setara studio AAA, sehingga dapat digunakan untuk pipeline agile maupun produksi kompleks multi-disiplin.
+Unreal Engine dikembangkan oleh Epic Games, perusahaan yang juga dikenal lewat Fortnite. Pemakaiannya tidak berhenti di game. Engine ini juga dipakai di industri film, arsitektur, otomotif, dan simulasi, pokoknya bidang yang butuh visual bagus dengan performa real-time \cite{modul2,epic-unreal}. Dari modul saya paham bahwa fitur yang tersedia di dalamnya setara dengan yang dipakai studio AAA, jadi engine ini sanggup dipakai untuk pipeline agile maupun produksi kompleks yang melibatkan banyak disiplin.
 
-Model lisensi Unreal Engine bersifat gratis pada tahap pengembangan. Royalti sebesar 5\% hanya berlaku jika saya merilis game secara komersial dan pendapatan kotor melebihi 1.000.000 USD \cite{modul2}. Hal ini membuat Unreal Engine menjadi pilihan yang aksesibel bagi mahasiswa untuk belajar tanpa biaya awal.
-
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.95\textwidth]{images/placeholder.png}}
-    \caption{Ilustrasi logo Unreal Engine dan Epic Games sebagai engine kelas industri yang gratis digunakan hingga batas royalti.}
-    \label{fig:ue-overview}
-\end{figure}
+Soal lisensi, Unreal Engine gratis dipakai selama tahap pengembangan. Royalti 5\% baru muncul kalau game-nya dirilis secara komersial dan pendapatan kotornya sudah lewat 1.000.000 USD \cite{modul2}. Buat mahasiswa seperti saya, skema ini jelas menguntungkan karena bisa belajar penuh tanpa keluar biaya di awal.
 
 \section{One Engine for All Platform}
-Unreal Engine mendukung distribusi build secara seamless ke berbagai platform, yaitu PC (Windows, Mac, Linux), Console (PS5, Xbox), dan Mobile (iOS, Android) \cite{modul2,epic-variants}. Saya mencatat bahwa kemampuan lintas platform ini sangat krusial untuk menjangkau audiens yang luas tanpa harus menulis ulang logika game untuk setiap platform.
+Unreal Engine bisa melakukan deploy build ke banyak platform sekaligus, yaitu PC (Windows, Mac, Linux), console (PS5, Xbox), dan mobile (iOS, Android) \cite{modul2,epic-variants}. Menurut saya kemampuan lintas platform ini penting, karena logika game tidak perlu ditulis ulang dari nol untuk tiap platform.
 
-Contoh ekstrem yang disebutkan dalam modul adalah Kuro Games yang berhasil merilis game open-world masif Wuthering Waves menggunakan versi modifikasi Unreal Engine untuk update live serentak di PC, console, dan perangkat mobile low-end pada hari yang sama \cite{kurogames,wuthering-cover}. Studi kasus ini menunjukkan fleksibilitas Unreal dalam menangani optimasi lintas perangkat.
-
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.95\textwidth]{images/placeholder.png}}
-    \caption{Konsep one engine for all platform: PC, console, dan mobile dengan studi kasus Wuthering Waves.}
-    \label{fig:one-engine}
-\end{figure}
+Contoh paling ekstrem yang disebutkan di modul adalah Kuro Games. Mereka merilis game open-world masif Wuthering Waves memakai versi modifikasi Unreal Engine, dan berhasil melakukan update live serentak di PC, console, bahkan perangkat mobile low-end pada hari yang sama \cite{kurogames,wuthering-cover}. Dari studi kasus itu kelihatan bahwa Unreal cukup fleksibel untuk menangani optimasi lintas perangkat yang jarak spesifikasinya jauh.
 
 \section{Epic Games Launcher sebagai Hub Manajemen}
-Langkah awal untuk mengakses Unreal Engine adalah melalui Epic Games Launcher. Saya membuka launcher tersebut kemudian mengakses Unreal Engine $>$ Library untuk melihat versi engine yang terpasang dan daftar project pada segmen ``MY PROJECTS'' \cite{modul2}.
+Pintu masuk ke Unreal Engine adalah Epic Games Launcher. Dari launcher ini saya buka menu Unreal Engine $>$ Library untuk melihat versi engine yang terpasang dan daftar project di segmen ``MY PROJECTS'' \cite{modul2}.
 
-Launcher juga dapat mendeteksi file project dengan ekstensi \texttt{.uproject} yang belum terdaftar. Jika muncul warning, instruksi pada modul adalah klik ``FIX NOW'' agar project dikenali kembali oleh launcher \cite{modul2}. Untuk membuka engine, saya klik \textbf{Launch} pada versi 5.8.1.
-
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.95\textwidth]{images/placeholder.png}}
-    \caption{Tampilan Epic Games Launcher pada menu Unreal Engine $>$ Library dengan tombol Launch 5.8.1 dan segmen MY PROJECTS.}
-    \label{fig:launcher}
-\end{figure}
+Launcher juga bisa mendeteksi file project berekstensi \texttt{.uproject} yang belum terdaftar. Kalau warning seperti itu muncul, instruksi modulnya sederhana: klik ``FIX NOW'' supaya project dikenali lagi oleh launcher \cite{modul2}. Setelah beres, engine dibuka dengan klik \textbf{Launch} pada versi 5.8.1.
 
 \section{Manajemen Project dan Template}
-Setelah engine diluncurkan, saya akan melihat Home Window yang menyediakan akses terpusat ke dokumentasi, sample projects, dan tutorial. Untuk membuat project baru, saya klik \textbf{New Project} sehingga masuk ke window New Projects \cite{modul2,epic-variants}.
+Begitu engine jalan, Home Window muncul dengan akses terpusat ke dokumentasi, sample projects, dan tutorial. Untuk bikin project baru, saya klik \textbf{New Project} dan masuk ke window New Projects \cite{modul2,epic-variants}.
 
-Pada window ini saya mengkonfigurasikan template. Sesuai instruksi praktikum pertemuan 2, saya memilih \textbf{GAMES $>$ Intro To Unreal} dan mengubah nama project dengan format \textbf{NAMA\_NIU\_Intro}, contoh \texttt{HAFIDZ\_535493\_Intro} \cite{modul2}. Penamaan ini penting untuk ketertiban dan identifikasi tugas. Perlu diperhatikan bahwa pada pertemuan 3 template berubah menjadi Third Person karena bug rigging pada IntroToUnreal, namun untuk pertemuan 2 tetap menggunakan Intro To Unreal.
+Di window inilah template dikonfigurasi. Sesuai instruksi praktikum pertemuan 2, saya memilih \textbf{GAMES $>$ Intro To Unreal} lalu mengubah nama project dengan format \textbf{NAMA\_NIU\_Intro}, contohnya \texttt{HAFIDZ\_535493\_Intro} \cite{modul2}. Format penamaan ini wajib diikuti supaya tugas gampang diidentifikasi. Catatan kecil: pada pertemuan 3 templatenya diganti ke Third Person karena ada bug rigging di IntroToUnreal, tapi untuk pertemuan 2 tetap pakai Intro To Unreal.
 
-Setelah project dibuat, akan muncul proses loading. Modul menyebutkan bahwa loading art dapat diganti dengan gambar custom pada setiap project sebagai ``Useless Fact'' \cite{modul2}.
-
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.95\textwidth]{images/placeholder.png}}
-    \caption{Window New Project dengan pemilihan template GAMES $>$ Intro To Unreal dan format penamaan NAMA\_NIU\_Intro.}
-    \label{fig:new-project}
-\end{figure}
+Setelah project dibuat, layar loading muncul. Modul menyelipkan satu ``Useless Fact'' di sini: gambar loading itu bisa diganti dengan gambar custom yang berbeda untuk tiap project \cite{modul2}.
 
 \section{Antarmuka Utama Editor Unreal Engine 5.8}
 \subsection{Outliner, Details, dan Viewport}
-Setelah loading selesai, saya masuk ke Editor dan disambut ``Welcome To The Editor!'' \cite{modul2}. Tiga panel inti yang saya pelajari adalah:
+Setelah loading selesai, editor terbuka dengan sambutan ``Welcome To The Editor!'' \cite{modul2}. Ada tiga panel inti yang paling sering dipakai:
+
 \begin{itemize}
-    \item \textbf{Outliner:} menampilkan semua objek/actor yang ada dalam level seperti mesh, light, camera, dan Player Start. Panel ini memudahkan seleksi dan pencarian objek tanpa harus mencarinya di Viewport \cite{modul2}.
-    \item \textbf{Details:} menampilkan properties dari objek yang dipilih. Jika saya memilih mesh, maka akan tampil transform, material, collision, physics, dan lighting \cite{modul2}.
-    \item \textbf{Viewport:} area kerja utama tempat saya melihat scene secara visual dan melakukan navigasi kamera serta penempatan objek \cite{modul2}.
+    \item \textbf{Outliner} berisi daftar semua objek atau actor yang ada dalam level, mulai dari mesh, light, camera, sampai Player Start. Panel ini memudahkan seleksi dan pencarian objek tanpa harus mencarinya satu per satu di Viewport \cite{modul2}.
+    \item \textbf{Details} menampilkan properties dari objek yang sedang dipilih. Misalnya saat saya klik sebuah mesh, yang muncul adalah transform, material, collision, physics, dan lighting objek itu \cite{modul2}.
+    \item \textbf{Viewport} adalah area kerja utama tempat scene terlihat secara visual. Navigasi kamera dan penempatan objek semuanya dilakukan di sini \cite{modul2}.
 \end{itemize}
 
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=1\textwidth]{images/placeholder.png}}
-    \caption{Panel Outliner, Details, dan Viewport sebagai tiga pilar navigasi editor.}
-    \label{fig:outliner-details-viewport}
-\end{figure}
-
 \subsection{Top Bar dan Content Drawer}
-Top Bar berisi fungsi penting: \textbf{Save Changes on Current Level}, \textbf{Switches editor workflow modes} (Landscape, Foliage, Mesh Paint, Modeling, Animation editing), \textbf{Add Objects}, \textbf{Blueprints Menu}, \textbf{Cinematics/Sequencer}, dan tombol \textbf{PLAY} \cite{modul2}. Sementara itu Content Drawer (atau Content Browser) dapat diakses dengan \texttt{CTRL + SPACE} dan berisi daftar aset project seperti mesh, material, texture, blueprint, dan map \cite{modul2}.
+Top Bar memuat fungsi-fungsi yang sering dipakai: \textbf{Save Changes on Current Level}, \textbf{Switches editor workflow modes} (Landscape, Foliage, Mesh Paint, Modeling, Animation editing), \textbf{Add Objects}, \textbf{Blueprints Menu}, \textbf{Cinematics/Sequencer}, dan tombol \textbf{PLAY} \cite{modul2}. Sementara itu Content Drawer (Content Browser) bisa dibuka cepat dengan \texttt{CTRL + SPACE} dan berisi daftar aset project seperti mesh, material, texture, blueprint, dan map \cite{modul2}.
 
-Untuk simulasi game, saya klik Play untuk memulai, Escape untuk menghentikan, dan SHIFT+F1 agar cursor mouse dapat keluar dari Viewport tanpa keluar dari mode Play \cite{modul2}.
-
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=1\textwidth]{images/placeholder.png}}
-    \caption{Top Bar editor dan Content Drawer yang dapat diakses via CTRL+SPACE.}
-    \label{fig:topbar-contentdrawer}
-\end{figure}
+Untuk menjalankan simulasi, tombol Play dipakai untuk memulai, Escape untuk berhenti, dan SHIFT+F1 dipakai kalau kursor mouse mau dikeluarkan dari Viewport tanpa keluar dari mode Play \cite{modul2}.
 
 \section{Transformasi, Grid, dan Manajemen Objek}
-Transformasi objek meliputi Move/Translate, Rotate, dan Scale yang dioperasikan melalui gizmo berupa panah, lingkaran, dan kotak di Viewport \cite{modul2}. Grid membantu penempatan presisi dan dapat diaktifkan/dinonaktifkan sesuai kebutuhan. Saya menambahkan objek melalui menu Add Objects dan dapat menghapus objek yang sulit diseleksi di Viewport melalui Outliner dengan seleksi berdasarkan nama lalu delete \cite{modul2}.
+Transformasi objek mencakup Move/Translate, Rotate, dan Scale. Ketiganya dioperasikan lewat gizmo berbentuk panah, lingkaran, dan kotak yang muncul di Viewport \cite{modul2}. Grid membantu penempatan presisi dan bisa diaktifkan atau dimatikan sesuai kebutuhan. Untuk manajemen objek, penambahan dilakukan lewat menu Add Objects, sedangkan objek yang sulit diklik langsung di Viewport bisa dihapus lewat Outliner dengan cara diseleksi berdasarkan nama lalu delete \cite{modul2}.
 
-Collision menentukan interaksi fisik antar objek, seperti apakah objek menghalangi pergerakan atau memiliki bentuk sederhana/kompleks. Pengaturan ini berada di panel Details saat objek dipilih \cite{modul2}.
-
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.95\textwidth]{images/placeholder.png}}
-    \caption{Transform gizmo (Move/Rotate/Scale) dan pengaturan grid serta collision pada Details.}
-    \label{fig:transform-collision}
-\end{figure}
+Collision mengatur bagaimana objek berinteraksi secara fisik dengan objek lain, misalnya apakah objek menghalangi pergerakan atau bentuk collision-nya sederhana atau kompleks. Pengaturan ini ada di panel Details saat objek dipilih \cite{modul2}.
 
 \section{Material, Hot-Swap, Particle, dan Physics}
-Material menentukan tampilan visual seperti Color, Metallic, dan Roughness. Saya dapat mengganti material melalui slot material pada Details dengan fitur Hot-Swap Material Slot yang memungkinkan penggantian cepat tanpa membuat ulang objek \cite{modul2}.
+Material menentukan tampilan permukaan objek lewat properti seperti Color, Metallic, dan Roughness. Penggantian material bisa dilakukan cepat lewat fitur Hot-Swap Material Slot di Details, tanpa perlu membuat ulang objek atau material dari awal \cite{modul2}.
 
-Untuk efek visual, Unreal menggunakan Niagara Editor untuk mengatur particle system seperti api, asap, dan ledakan \cite{modul2}. Sementara itu property Physics berkaitan dengan gravitasi, respons tabrakan, dan simulasi; pengaturannya juga di Details.
-
-Menambahkan cahaya dilakukan dengan shortcut \texttt{L + Left Click} untuk Point Light, yaitu sumber cahaya yang memancar ke segala arah seperti bola lampu \cite{modul2}.
-
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.95\textwidth]{images/placeholder.png}}
-    \caption{Pengaturan material (Color/Metallic/Roughness), hot-swap slot, serta Niagara particle system.}
-    \label{fig:material-physics}
-\end{figure}
+Untuk efek visual, Unreal memakai Niagara Editor sebagai tempat mengatur particle system seperti api, asap, dan ledakan \cite{modul2}. Property physics yang mengatur gravitasi dan respons tabrakan juga diubah lewat Details. Menambahkan cahaya dilakukan dengan shortcut \texttt{L + Left Click} untuk Point Light, yaitu sumber cahaya yang memancar ke segala arah dari satu titik, mirip bola lampu \cite{modul2}.
 
 \section{Sequencer, Blueprint Logic, dan Penyimpanan}
-Sequencer adalah fitur untuk membuat cinematics dan cutscene. Saya dapat masuk ke sistem ini melalui Outliner dengan \textbf{Right Click $>$ Edit} pada objek terkait \cite{modul2}. Logika objek diatur melalui Blueprint, yaitu sistem visual scripting. Melalui Blueprint saya dapat menentukan perilaku seperti event ketika objek disentuh atau ditabrak \cite{modul2}.
+Sequencer adalah fitur untuk membuat cinematics dan cutscene. Masuknya lewat Outliner, dengan \textbf{Right Click $>$ Edit} pada objek terkait \cite{modul2}. Sementara itu logika objek diatur lewat Blueprint, sistem visual scripting Unreal. Lewat Blueprint, perilaku objek bisa ditentukan, misalnya apa yang terjadi ketika objek disentuh atau ditabrak \cite{modul2}.
 
-Sebagai langkah akhir, saya menyimpan perubahan melalui \textbf{Save Changes on Current Level} atau shortcut \texttt{CTRL + S} agar progress tidak hilang \cite{modul2}.
-
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.95\textwidth]{images/placeholder.png}}
-    \caption{Alur masuk Sequencer via Outliner dan Blueprint sebagai sistem logika visual.}
-    \label{fig:sequencer-blueprint}
-\end{figure}
+Sebagai langkah penutup, semua perubahan disimpan lewat \textbf{Save Changes on Current Level} atau shortcut \texttt{CTRL + S} supaya progress tidak hilang \cite{modul2}.
 
 \clearpage
 
 \chapter[\tocboldsection{Hasil dan Pembahasan}]{Hasil dan Pembahasan}
 
-Pada bab ini saya mendokumentasikan langkah praktikum Navigate Unreal Engine 5.8 sesuai Modul Pertemuan 2. Setiap langkah saya lakukan pada Unreal Engine 5.8.1 melalui Epic Games Launcher dan saya dokumentasikan dengan screenshot beserta keterangan singkat. Project yang saya buat menggunakan format \texttt{HAFIDZ\_535493\_Intro} sesuai instruksi modul.
+Bab ini berisi dokumentasi praktikum Navigate Unreal Engine 5.8 sesuai Modul Pertemuan 2. Semua langkah saya kerjakan di Unreal Engine 5.8.1 lewat Epic Games Launcher, dan tiap langkah saya dokumentasikan dengan screenshot berikut keterangan singkatnya. Project yang saya buat bernama \texttt{HAFIDZ\_535493\_Intro} sesuai format yang diminta modul.
+
+Satu hal yang perlu dicatat: template Intro To Unreal ternyata bukan level kosong, melainkan tutorial interaktif 16 stasiun. Jadi alur praktikumnya banyak berjalan mengikuti stasiun-stasiun tutorial tersebut sambil mencoba langsung fitur yang dijelaskan di tiap dindingnya.
 
 \section{Dokumentasi Praktikum}
 
 \subsection{Persiapan Awal: Epic Games Launcher dan Pembuatan Project}
 
 \begin{enumerate}
-    \item \textbf{Membuka Epic Games Launcher dan Akses Unreal Engine $>$ Library.} Saya membuka Epic Games Launcher dan masuk ke menu Unreal Engine $>$ Library untuk melihat engine terpasang.
+    \item \textbf{Membuka Epic Games Launcher dan akses Unreal Engine $>$ Library.} Saya membuka Epic Games Launcher lalu masuk ke menu Unreal Engine $>$ Library untuk melihat engine yang sudah terpasang.
 
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Tampilan Epic Games Launcher pada menu Unreal Engine $>$ Library.}
-    \label{fig:ss-launcher}
-\end{figure}
+    \item \textbf{Menangani warning file .uproject.} Modul menginstruksikan klik \textbf{FIX NOW} kalau launcher mendeteksi file \texttt{.uproject} yang tidak terdaftar. Pada percobaan saya warning ini tidak muncul, jadi langkahnya hanya saya siapkan sebagai antisipasi.
 
-    \item \textbf{Menangani Warning File .uproject (FIX NOW).} Jika launcher mendeteksi file \texttt{.uproject} tidak terdaftar, saya klik \textbf{FIX NOW} sesuai instruksi. Pada percobaan saya, warning muncul/tidak muncul (sesuaikan).
+    \item \textbf{Launch Unreal Engine 5.8.1.} Saya klik \textbf{Launch} pada engine versi 5.8.1. Project yang pernah dibuat sebelumnya muncul di segmen ``MY PROJECTS''.
 
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Warning file .uproject tidak terdaftar dan tombol FIX NOW pada launcher.}
-    \label{fig:ss-fixnow}
-\end{figure}
+    \item \textbf{Home Window dan klik New Project.} Setelah engine terbuka, Home Window muncul dengan akses ke dokumentasi, sample projects, dan tutorial. Dari sini saya klik \textbf{New Project}.
 
-    \item \textbf{Launch Unreal Engine 5.8.1 dan Memeriksa MY PROJECTS.} Saya klik \textbf{Launch} pada engine versi 5.8.1. Project yang pernah dibuat muncul pada segmen ``MY PROJECTS''.
+    \item \textbf{Window New Projects: pilih GAMES $>$ Intro To Unreal.} Saya memilih template \textbf{GAMES $>$ Intro To Unreal} dan mengganti Project Name menjadi \texttt{HAFIDZ\_535493\_Intro} sesuai format NAMA\_NIU\_Intro.
 
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Tombol Launch pada UE 5.8.1 dan segmen MY PROJECTS.}
-    \label{fig:ss-launch}
-\end{figure}
-
-    \item \textbf{Home Window dan Klik New Project.} Setelah engine terbuka, saya berada di Home Window yang menyediakan dokumentasi, sample projects, dan tutorial. Saya klik \textbf{New Project}. Pada screenshot terlihat panel kiri dengan tombol New Project tersorot biru dan daftar Recent Projects.
-
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-01-home-window.jpg}}
-    \caption{Home Window UE 5.8 pada Home Panel dengan tombol New Project tersorot dan daftar Recent Projects (MyProject2, Hafidz, MyProject).}
-    \label{fig:ss-home}
-\end{figure}
-
-    \item \textbf{Window New Projects: Memilih GAMES $>$ Intro To Unreal dan Penamaan.} Saya memilih template \textbf{GAMES $>$ Intro To Unreal} dan mengubah Project Name menjadi \texttt{HAFIDZ\_535493\_Intro} sesuai format NAMA\_NIU\_Intro.
-
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Window New Projects dengan template Intro To Unreal dan penamaan HAFIDZ\_535493\_Intro.}
-    \label{fig:ss-newproject}
-\end{figure}
-
-    \item \textbf{Proses Loading Project.} Saya menunggu hingga loading selesai. Loading art pada tahap ini dapat diganti dengan gambar custom per project.
-
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Layar loading project Unreal Engine 5.8.}
-    \label{fig:ss-loading}
-\end{figure}
+    \item \textbf{Menunggu loading project.} Setelah project dibuat, saya menunggu proses loading sampai selesai. Seperti ``Useless Fact'' di modul, gambar loading ini sebenarnya bisa diganti custom per project.
 \end{enumerate}
 
 \subsection{Eksplorasi Antarmuka Editor}
 
 \begin{enumerate}
-    \item \textbf{Welcome To The Editor dan Lvl\_IntroRoom (Project Hafidz).} Saya masuk ke editor project \texttt{Hafidz} pada level \texttt{Lvl\_IntroRoom} dan melihat overlay ``Welcome to Unreal Engine 5!'' yang memandu navigasi dasar. Documentation/tutorial dapat ditutup bila tidak diperlukan.
+    \item \textbf{Masuk editor Lvl\_IntroRoom.} Project terbuka langsung pada level \texttt{Lvl\_IntroRoom} dengan overlay ``Welcome to Unreal Engine 5!'' yang memandu navigasi dasar. Di Outliner terlihat level ini berisi 407 actors dengan folder seperti Bridge, Lighting, dan Room\_Animation. Saat saya klik objek \texttt{SM\_Cube12}, panel Details menampilkan Transform (Location 150, 100, 750; Scale 12, 3, 0.505), Static Mesh \texttt{SM\_Cube}, dan material \texttt{MI\_Intro\_Colorway}.
 
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-02-lvl-intro-room.jpg}}
-    \caption{Editor project Hafidz pada Lvl\_IntroRoom dengan overlay Welcome to UE5 (RMB + WASD/QE untuk fly, tombol Play hijau), Outliner (407 actors), dan Content Browser.}
-    \label{fig:ss-welcome-doc}
+    \customfbox{\includegraphics[width=0.85\textwidth]{images/ss-22-viewport-interior.png}}
+    \caption{Tampilan awal editor Lvl\_IntroRoom dengan overlay Welcome to Unreal Engine 5.}
+    \label{fig:ss-welcome}
 \end{figure}
 
-    \item \textbf{Mengenal Panel Outliner.} Saya memeriksa Outliner yang menampilkan daftar semua objek dalam level. Tampak hierarki Lvl\_IntroRoom dengan folder Bridge\_001/002, Lighting, dan Room\_Animation.
-
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.6\textwidth]{images/ss-03-outliner.jpg}}
-    \caption{Panel Outliner pada Lvl\_IntroRoom (407 actors, 386 loaded) dengan folder Bridge, Lighting (DirectionalLight, SkyAtmosphere, VolumetricCloud), dan Room\_Animation.}
+    \customfbox{\includegraphics[width=0.55\textwidth]{images/ss-07-play-stop.png}}
+    \caption{Outliner Lvl\_IntroRoom berisi 407 actors dengan folder Bridge, Lighting, dan Room\_Animation.}
     \label{fig:ss-outliner}
 \end{figure}
 
-    \item \textbf{Mengenal Panel Details.} Saya memilih objek \texttt{SM\_Cube12 (Instance)} dan memeriksa panel Details yang menampilkan properties seperti Transform (Location 150,100,750, Scale 12,3,0.505, Mobility Static), Static Mesh \texttt{SM\_Cube}, dan Material \texttt{MI\_Intro\_Colorway}.
-
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.7\textwidth]{images/ss-04-details.jpg}}
-    \caption{Panel Details pada SM\_Cube12 menampilkan Transform, Static Mesh SM\_Cube, dan Material MI\_Intro\_Colorway (lambert1).}
+    \customfbox{\includegraphics[width=0.65\textwidth]{images/ss-08-transform.png}}
+    \caption{Panel Details objek SM\_Cube12: Transform, Static Mesh SM\_Cube, dan material MI\_Intro\_Colorway.}
     \label{fig:ss-details}
 \end{figure}
 
-    \item \textbf{Mengenal Viewport.} Saya melakukan navigasi di Viewport sebagai area kerja utama untuk melihat scene secara visual.
+    \item \textbf{Navigasi Viewport dengan fly mode.} Saya mencoba navigasi kamera di Viewport memakai kombinasi klik kanan mouse (RMB) plus tombol WASD untuk bergerak dan QE untuk naik-turun. Dari area luar bangunan, terlihat ramp menuju dinding stasiun 8/16 Atmosphere dengan langit biru berawan di atasnya. Di sinilah perbedaan kecepatan gerak kamera mulai terasa saat scroll mouse diputar.
 
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Viewport sebagai area utama melihat dan menata scene 3D.}
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-26-viewport-ramp.png}}
+    \caption{Navigasi Viewport menuju stasiun 8/16 Atmosphere dengan langit biru dan ramp akses ke bangunan utama.}
     \label{fig:ss-viewport}
 \end{figure}
 
-    \item \textbf{Mengenal Fungsi Top Bar.} Saya mengidentifikasi Top Bar yang berisi Save, Switch workflow modes (Landscape/Foliage/Mesh Paint/Modeling/Animation editing), Add Objects, Blueprints Menu, Cinematics/Sequencer, dan PLAY.
+    \item \textbf{Menguji PLAY dan kontrol di dalam game.} Saya klik tombol Play hijau di Top Bar. Mode Play langsung aktif dan kontrol berubah mengikuti setup project: mouse untuk melihat sekitar, WASD untuk berjalan. Di bagian bawah layar muncul tulisan ``Game is running. Press Esc key to return to Editor'', dan notifikasi ``Tutorial Closed'' muncul di kanan bawah. Setelah selesai mencoba, saya menekan Escape untuk berhenti. SHIFT+F1 saya pakai saat butuh mengeluarkan kursor tanpa keluar dari mode Play.
 
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Top Bar editor dengan tombol Save, Add, Blueprint, Sequencer, dan Play.}
-    \label{fig:ss-topbar}
-\end{figure}
-
-    \item \textbf{Menguji PLAY, STOP, dan Keluar Viewport.} Saya klik Play untuk memulai simulasi, Escape untuk menghentikan, dan SHIFT+F1 untuk mengeluarkan cursor tanpa keluar mode Play.
-
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Tombol Play/Stop dan pengujian SHIFT+F1 untuk mengeluarkan cursor saat Play.}
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-07-play-stop.png}}
+    \caption{Mode Play aktif di Lvl\_IntroRoom: kontrol berubah ke mouse + WASD, dengan status ``Game is running'' di bagian bawah viewport.}
     \label{fig:ss-play}
 \end{figure}
 \end{enumerate}
@@ -419,75 +302,61 @@ Pada bab ini saya mendokumentasikan langkah praktikum Navigate Unreal Engine 5.8
 \subsection{Manipulasi Objek, Material, dan Aset}
 
 \begin{enumerate}
-    \item \textbf{Transform Object: Move/Rotate/Scale.} Saya mencoba memindahkan, memutar, dan mengubah skala objek menggunakan gizmo di Viewport.
+    \item \textbf{Transform Object: Move, Rotate, Scale.} Di stasiun 1/16 Moving Objects, saya mencoba tiga mode transformasi. Objek kubus di stasiun ini menampilkan gizmo sesuai mode yang dipilih: panah untuk Move, busur lingkaran untuk Rotate, dan kotak untuk Scale. Teks di dinding menandai ketiga mode itu dengan label ``Move'', ``Rotate'', dan ``Scale'' besar.
 
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Transform objek menggunakan gizmo Move/Rotate/Scale di Viewport.}
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-08-transform.png}}
+    \caption{Stasiun 1/16 Moving Objects: percobaan gizmo Move, Rotate, dan Scale pada kubus.}
     \label{fig:ss-transform}
 \end{figure}
 
-    \item \textbf{Enable/Disable Grid.} Saya mengaktifkan dan menonaktifkan grid di Viewport untuk penempatan presisi.
+    \item \textbf{Enable/Disable Grid.} Saya mengaktifkan dan mematikan grid lewat ikon grid di toolbar atas Viewport, lengkap dengan pengaturan ukuran snap-nya. Saat grid aktif, garis bantu muncul di lantai viewport dan objek lebih gampang disejajarkan; saat dimatikan, tampilan viewport jadi lebih bersih.
 
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Grid di Viewport yang dapat di-enable/disable untuk presisi penempatan.}
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-19-sequencer.png}}
+    \caption{Pengaturan grid pada toolbar Viewport untuk penempatan objek yang presisi.}
     \label{fig:ss-grid}
 \end{figure}
 
-    \item \textbf{Menambahkan Objek dan Mengganti Material Awal.} Saya menambahkan objek via Add Objects pada Top Bar dan mengganti material dasarnya.
+    \item \textbf{Menambahkan objek ke level.} Saya menekan ikon kubus dengan tanda plus (Add Objects) di Top Bar. Menu cepatnya berisi kategori seperti Lights, Visual Effects, Volumes, dan Recent/Favorites, sehingga objek baru bisa langsung dipilih dan ditaruh ke scene.
 
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Menambahkan objek ke level dan mengganti material melalui Details.}
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-20-sequencer-flythrough.png}}
+    \caption{Menu Add Objects pada Top Bar untuk menambahkan objek baru ke dalam level.}
     \label{fig:ss-addobject}
 \end{figure}
 
-    \item \textbf{Mengakses Content Drawer dengan CTRL+SPACE.} Saya membuka Content Drawer untuk melihat aset project seperti mesh dan material.
+    \item \textbf{Mengakses Content Drawer dengan CTRL+SPACE.} Saya membuka Content Drawer memakai shortcut \texttt{CTRL + SPACE}. Panel ini memuat aset project seperti mesh, material, dan texture, dan bisa dipakai untuk menarik aset langsung ke viewport.
+
+    \item \textbf{Mengubah collision pada object.} Saya memilih objek \texttt{SM\_Ramp5} lalu membuka bagian Collision di panel Details. Dropdown Collision Presets menampilkan daftar preset seperti NoCollision, BlockAll, OverlapAll, BlockAllDynamic, Pawn, PhysicsActor, Trigger, sampai Ragdoll. Dari sini cara objek bereaksi terhadap tabrakan bisa diatur tanpa menyentuh mesh-nya.
 
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Content Drawer yang diakses via CTRL+SPACE menampilkan aset project.}
-    \label{fig:ss-contentdrawer}
-\end{figure}
-
-    \item \textbf{Mengubah Collision Pada Object.} Saya memilih objek dan mengubah pengaturan collision pada Details untuk menentukan interaksi fisik.
-
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Pengaturan collision pada Details untuk interaksi fisik objek.}
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-12-collision.png}}
+    \caption{Dropdown Collision Presets pada Details milik SM\_Ramp5, dengan pilihan seperti BlockAll, OverlapAll, dan PhysicsActor.}
     \label{fig:ss-collision}
 \end{figure}
 
-    \item \textbf{Menghapus Objek via Outliner.} Saya menghapus objek melalui Outliner dengan seleksi objek lalu delete.
+    \item \textbf{Menghapus objek via Outliner.} Untuk objek yang posisinya sulit diklik langsung di Viewport, saya menyeleksinya dari daftar Outliner berdasarkan nama lalu menekan delete. Cara ini jauh lebih aman daripada menebak-nebak klik di scene yang objeknya bertumpuk.
+
+    \item \textbf{Mengganti property material: Color, Metallic, Roughness.} Di stasiun 5/16 Materials, saya mengklik bola biru (\texttt{Sphere8}) dan membuka material \texttt{MI\_Intro\_Colorway} dari slot Element 0 di Details. Material editor terbuka dengan preview bola besar di kiri, dan Color Picker muncul saat Base Color diklik. Saya mengubah nilai RGB (R 0.025, G 0.014, B 0.104) untuk menggeser warna dasar, lalu mengamati efek nilai Metallic 0.0 dan Roughness 0.268 ke pantulan permukaannya.
 
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Menghapus objek pada level via daftar Outliner.}
-    \label{fig:ss-delete-outliner}
-\end{figure}
-
-    \item \textbf{Mengganti Property Material: Color, Metallic, Roughness.} Saya mengubah Color, Metallic, dan Roughness untuk melihat perubahan visual.
-
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Pengaturan property material Color, Metallic, dan Roughness.}
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-28-material-colorpicker.png}}
+    \caption{Material editor MI\_Intro\_Colorway dengan Color Picker untuk mengubah Base Color, Metallic, dan Roughness.}
     \label{fig:ss-material-prop}
 \end{figure}
 
-    \item \textbf{Hot-Swap Material Slot.} Saya mencoba hot-swap pada material slot untuk mengganti material dengan cepat.
+    \item \textbf{Hot-swap material slot.} Masih di stasiun Materials, saya mencoba hot-swap dengan mengganti isi slot material Element 0 pada \texttt{Sphere8} langsung dari dropdown di Details. Material baru langsung terpasang ke bola tanpa perlu membuka editor material, jadi cara ini cocok untuk coba-coba tampilan dengan cepat.
 
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Hot-swap material slot pada objek untuk pergantian cepat.}
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-29-material-graph.png}}
+    \caption{Hot-swap material pada slot Element 0 milik Sphere8 lewat dropdown di panel Details.}
     \label{fig:ss-hotswap}
 \end{figure}
 \end{enumerate}
@@ -495,86 +364,88 @@ Pada bab ini saya mendokumentasikan langkah praktikum Navigate Unreal Engine 5.8
 \subsection{Pencahayaan, Fisika, Partikel, dan Logika}
 
 \begin{enumerate}
-    \item \textbf{Mengganti Property Particle System via Niagara Editor.} Saya membuka Niagara Editor untuk mengubah property particle system seperti api/asap.
+    \item \textbf{Mengganti property particle system via Niagara Editor.} Saya membuka aset \texttt{NS\_DemoNiagara} dan Niagara Editor tampil dengan dua emitter: \texttt{OmnidirectionalBurst} dan \texttt{Ribbon\_Trail\_Leader}. Di panel Details saya mengubah Spawn Count pada modul Spawn Burst Instantaneous menjadi 170, dan perubahannya langsung kelihatan di preview. Editor ini juga menampilkan System Attributes dan timeline simulasi di bagian bawah.
 
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Niagara Editor untuk mengatur property particle system.}
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-22-niagara.png}}
+    \caption{Niagara Editor pada aset NS\_DemoNiagara dengan pengaturan Spawn Burst Instantaneous (Spawn Count 170).}
     \label{fig:ss-niagara}
 \end{figure}
 
-    \item \textbf{Mengganti Property Physics.} Saya mengaktifkan simulasi physics pada objek dan mengatur properti seperti gravitasi di Details.
+    \item \textbf{Mengganti property physics.} Di stasiun 9/16 Physics, saya memilih tumpukan kubus ungu \texttt{SM\_ChamferCube2} dan membuka kategori Physics di Details. Di sana saya mencentang Simulate Physics dengan Mass 5.0 kg, Linear Damping 0.01, dan Enable Gravity aktif. Saat di-play, kubus yang tadinya diam langsung jatuh dan saling menabrak mengikuti simulasi.
 
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Pengaturan property physics pada Details (gravity dan simulasi).}
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-17-physics.png}}
+    \caption{Pengaturan Physics pada SM\_ChamferCube2: Simulate Physics aktif dengan Mass 5.0 kg dan Enable Gravity.}
     \label{fig:ss-physics}
 \end{figure}
 
-    \item \textbf{Menambahkan Cahaya Point Light dengan L + Left Click.} Saya menambahkan Point Light ke level menggunakan shortcut \texttt{L + Left Click}.
+    \item \textbf{Menambahkan Point Light dengan L + Left Click.} Di stasiun 8/16 Atmosphere, saya menambahkan Point Light dengan menahan tombol \texttt{L} lalu klik kiri di viewport. Cahaya langsung muncul di titik yang diklik. Saya juga memeriksa \texttt{DirectionalLight} di Outliner: intensitasnya 6.125057 lux dengan Temperature 6500, dan memutar rotasinya membuat langit berubah jadi nuansa senja oranye-ungu.
 
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Penambahan Point Light dengan shortcut L + Left Click di Viewport.}
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-27-hasil-akhir.png}}
+    \caption{Stasiun 8/16 Atmosphere dengan Point Light yang baru ditambahkan dan Details DirectionalLight (Intensity 6.125 lux, Temperature 6500).}
     \label{fig:ss-pointlight}
 \end{figure}
 
-    \item \textbf{Mencoba Masuk Ke Sistem Sequencer (Right Click $>$ Edit).} Saya masuk ke Sequencer via Outliner dengan klik kanan $>$ Edit.
+    \item \textbf{Mencoba masuk ke sistem Sequencer.} Di stasiun 12/16 Sequencer, saya klik kanan objek sequence di Outliner lalu pilih Edit. Panel Sequencer terbuka di bawah viewport dengan timeline \texttt{NewLevelSequence} berisi track kamera \texttt{CineCameraActor}. Saat playhead digeser ke frame 269, viewport ikut menampilkan sudut kamera sinematik yang melintasi area stasiun 11/16 Animation dan 12/16 Sequencer.
 
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Masuk ke sistem Sequencer via Right Click $>$ Edit pada Outliner.}
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-23-animation.png}}
+    \caption{Editor Sequencer dengan timeline NewLevelSequence dan track CineCameraActor di stasiun 12/16.}
     \label{fig:ss-sequencer}
 \end{figure}
 
-    \item \textbf{Mengganti Logic Suatu Object via Blueprint.} Saya membuka Blueprint untuk melihat logika objek dan mengubah koneksi event sederhana.
+    \item \textbf{Menjalankan camera flythrough.} Saat sequence dijalankan, kamera bergerak otomatis mengikuti track yang sudah dibuat. Viewport menampilkan label ``CineCameraActor'' dan flythrough melewati dinding-dinding stasiun dengan pencahayaan dramatis. Ada peringatan kecil ``Object Binding / Bound Object is missing!'' di timeline, tanda ada satu binding objek yang putus, tapi sequence tetap jalan.
 
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Blueprint logic untuk mengatur perilaku objek.}
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-22-viewport-interior.png}}
+    \caption{Camera flythrough Sequencer yang sedang berjalan melewati area stasiun dengan view CineCameraActor.}
+    \label{fig:ss-flythrough}
+\end{figure}
+
+    \item \textbf{Mengganti logic object via Blueprint.} Di stasiun 13/16 Blueprint, saya membuka \texttt{BP\_DoorTrigger}. EventGraph-nya berisi rangkaian node: BeginOverlap memicu Call Trigger, masuk ke Flip Flop, lalu bercabang ke Set Vector Parameter Value untuk mengganti warna material \texttt{MID\_Light}. Di panel Components terlihat variabel True Col, False Col, dan MID\_Light. Dari sini kelihatan bagaimana logika visual menggantikan kode untuk mengatur perilaku switch dan lampu.
+
+\begin{figure}[H]
+    \centering
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-21-blueprint.png}}
+    \caption{EventGraph Blueprint BP\_DoorTrigger dengan node BeginOverlap, Flip Flop, dan Set Vector Parameter Value.}
     \label{fig:ss-blueprint}
 \end{figure}
 
-    \item \textbf{Save Project (CTRL+S).} Saya menyimpan perubahan level melalui Save Changes on Current Level dan shortcut \texttt{CTRL+S}.
-
-\begin{figure}[H]
-    \centering
-    \customfbox{\includegraphics[width=0.9\textwidth]{images/placeholder.png}}
-    \caption{Save Project via tombol Save dan shortcut CTRL+S.}
-    \label{fig:ss-save}
-\end{figure}
+    \item \textbf{Save project dengan CTRL+S.} Setelah semua percobaan selesai, saya menyimpan perubahan level dengan tombol Save di Top Bar dan memastikannya lewat shortcut \texttt{CTRL+S}.
 \end{enumerate}
 
 \section{Hasil Akhir}
-Pada hasil akhir, saya berhasil membuat project \texttt{HAFIDZ\_535493\_Intro} berbasis template Intro To Unreal pada Unreal Engine 5.8.1 dan memahami alur navigasi editor secara menyeluruh. Level yang saya buat telah berisi objek dengan material yang sudah diganti (Color/Metallic/Roughness via hot-swap), collision dan physics yang diatur, Point Light yang ditambahkan, serta particle system Niagara yang dimodifikasi. Saya juga telah mencoba masuk ke Sequencer dan melihat Blueprint logic, kemudian menyimpan project dengan aman.
+Di akhir praktikum, project \texttt{HAFIDZ\_535493\_Intro} berhasil dibuat dari template Intro To Unreal di Unreal Engine 5.8.1 dan seluruh alur navigasi editor sudah saya coba langsung. Levelnya sudah berisi objek dengan material yang diganti lewat Color Picker maupun hot-swap slot, collision dan physics yang diatur dari Details, Point Light tambahan di area Atmosphere, particle Niagara yang Spawn Count-nya dimodifikasi, serta sequence kamera yang berjalan lewat Sequencer. Terakhir, semuanya saya simpan dengan aman.
 
 \begin{figure}[H]
     \centering
-    \customfbox{\includegraphics[width=1\textwidth]{images/placeholder.png}}
-    \caption{Hasil akhir level pada project HAFIDZ\_535493\_Intro setelah modifikasi objek, material, cahaya, dan physics.}
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-16-metasounds.png}}
+    \caption{Hasil akhir penjelajahan Lvl\_IntroRoom sampai stasiun 7/16 Metasounds setelah seluruh rangkaian modifikasi objek, material, cahaya, dan physics selesai dikerjakan.}
     \label{fig:hasil-akhir}
 \end{figure}
 
-Hasil ini menunjukkan bahwa saya mampu mengikuti instruksi pada modul mulai dari Epic Games Launcher, manajemen project, hingga manipulasi editor dan komponen visual sesuai ketentuan Format Tugas Modul 2 \cite{modul2}.
+Hasil ini menunjukkan saya bisa mengikuti instruksi modul dari awal Epic Games Launcher sampai manipulasi editor dan komponen visual, sesuai ketentuan Format Tugas Modul 2 \cite{modul2}.
 
 \clearpage
 
 \chapter{Kesimpulan}
-Berdasarkan praktikum yang telah saya lakukan pada Pertemuan 2 Navigate Unreal Engine 5.8, dapat disimpulkan bahwa Unreal Engine 5.8 merupakan engine real-time lintas platform yang dikembangkan Epic Games dan dapat digunakan secara gratis hingga batas royalti komersial 1 juta USD. Melalui Epic Games Launcher saya mampu mengelola instalasi engine dan project, termasuk menangani warning file \texttt{.uproject}. Antarmuka editor yang terdiri dari Outliner, Details, Viewport, Content Drawer, dan Top Bar memberikan workflow terpusat untuk menata level.
+Dari praktikum Pertemuan 2 Navigate Unreal Engine 5.8, saya simpulkan bahwa Unreal Engine 5.8 adalah engine real-time lintas platform buatan Epic Games yang gratis dipakai sampai batas royalti komersial 1 juta USD. Lewat Epic Games Launcher saya bisa mengelola instalasi engine dan project, termasuk antisipasi warning file \texttt{.uproject}. Antarmuka editor yang terdiri dari Outliner, Details, Viewport, Content Drawer, dan Top Bar ternyata memberikan workflow yang terpusat dan enak dipakai untuk menata level.
 
-Saya juga memahami transformasi objek (Move/Rotate/Scale), pengaturan grid, penambahan dan penghapusan objek via Outliner, penggantian material termasuk hot-swap dan pengaturan Color/Metallic/Roughness, serta pengaturan collision dan physics pada Details. Penambahan Point Light dengan \texttt{L + Left Click} dan pengaturan particle system via Niagara Editor memperkaya aspek visual. Akses Sequencer dan Blueprint memperkenalkan dasar cinematics dan logika visual scripting, yang kemudian saya simpan melalui \texttt{CTRL+S}. Seluruh rangkaian ini sesuai dengan tujuan praktikum dan membekali saya untuk pengembangan game lanjutan pada pertemuan berikutnya.
+Saya juga jadi paham cara melakukan transformasi objek (Move/Rotate/Scale), mengatur grid, menambah dan menghapus objek via Outliner, mengganti material baik lewat Color Picker maupun hot-swap slot, serta mengatur collision dan physics dari Details. Penambahan Point Light dengan \texttt{L + Left Click} dan pengaturan particle via Niagara Editor menambah wawasan soal aspek visual. Akses ke Sequencer dan Blueprint memberi gambaran awal tentang cinematics dan visual scripting, dan semuanya saya tutup dengan menyimpan project lewat \texttt{CTRL+S}. Seluruh rangkaian ini sesuai tujuan praktikum dan jadi bekal untuk materi pengembangan game di pertemuan berikutnya.
 
 \clearpage
 \addcontentsline{toc}{chapter}{Daftar Pustaka}
 \renewcommand{\bibname}{Daftar Pustaka}
 \begin{thebibliography}{99}
     \bibitem{modul2} Modul Praktikum Pengembangan Game Pertemuan 2 --- Navigate Unreal Engine 5.8, T.A. 2026/2027. Semester Gasal, Universitas Gadjah Mada.
-    \bibitem{epic-unreal} Epic Games, ``Unreal Engine 5 Documentation'', 2026. [Online]. Tersedia: \url{https://dev.epicgames.com/documentation/unreal-engine/}. 
+    \bibitem{epic-unreal} Epic Games, ``Unreal Engine 5 Documentation'', 2026. [Online]. Tersedia: \url{https://dev.epicgames.com/documentation/unreal-engine/}.
     \bibitem{epic-variants} Epic Games, ``Variants in Game Templates'', 2026. [Online]. Tersedia: \url{https://dev.epicgames.com/documentation/unreal-engine/variants-in-game-templates}.
     \bibitem{kurogames} Kuro Games, ``Company Introduction'', 2026. [Online]. Tersedia: \url{https://www.kurogames.com/introduction}.
     \bibitem{wuthering-cover} PCGamingWiki, ``Wuthering Waves Cover'', 2026. [Online]. Tersedia: \url{https://images.pcgamingwiki.com/4/47/Wuthering_Waves_cover.jpg}.
