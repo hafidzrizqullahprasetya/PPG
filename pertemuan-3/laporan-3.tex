@@ -1,0 +1,376 @@
+\documentclass[a4paper,oneside,12pt]{report}
+% Package yang diperlukan
+\usepackage{fontspec}       % Font sistem untuk XeLaTeX/LuaLaTeX
+\usepackage{setspace}       % Pengaturan jarak antarbaris
+\usepackage{graphicx}      % Untuk memasukkan gambar
+\usepackage{titling}       % Untuk kustomisasi halaman judul
+\usepackage{geometry}      % Untuk mengatur margin halaman
+\usepackage{listings}      % Untuk menampilkan blok kode
+\usepackage{xcolor}        % Untuk menggunakan warna
+\usepackage{float}         % Untuk kontrol penempatan float (seperti gambar)
+\usepackage{hyperref}      % Untuk membuat hyperlink (URL, referensi)
+\usepackage{indentfirst}   % Untuk memberi indentasi pada paragraf pertama setiap seksi
+\usepackage{url}           % Untuk format URL
+\usepackage{fancyhdr}      % Untuk kustomisasi header dan footer
+\usepackage{tocloft}       % Untuk kustomisasi Daftar Isi
+\usepackage{bookmark}      % Untuk manajemen bookmark PDF yang lebih baik
+
+% Font dan spasi standar laporan praktikum
+\setmainfont{TeX Gyre Termes}
+\onehalfspacing
+
+%======================================================================
+% PENGATURAN GEOMETRI HALAMAN
+%======================================================================
+\geometry{left=3cm, right=2.5cm, top=2cm, bottom=2.5cm}
+\sloppy
+
+%======================================================================
+% PENGATURAN WARNA UNTUK BLOK KODE
+%======================================================================
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{darkblue}{rgb}{0,0,0.6}
+
+%======================================================================
+% PENGATURAN BLOK KODE (LISTINGS)
+%======================================================================
+\lstdefinestyle{commonstyle}{
+    backgroundcolor=\color{backcolour},
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single,
+    basicstyle=\ttfamily\footnotesize,
+    numberstyle=\tiny\color{codegray},
+    columns=flexible,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    breakindent=0pt,
+    breakautoindent=false
+}
+
+%======================================================================
+% PENGATURAN LAIN-LAIN
+%======================================================================
+\newcommand{\customfbox}[1]{%
+  \setlength{\fboxsep}{0pt}%
+  \setlength{\fboxrule}{0.5pt}%
+  \fcolorbox{black}{white}{#1}%
+}
+\renewcommand{\figurename}{Gambar}
+\renewcommand{\thefigure}{\arabic{figure}}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=black,
+    urlcolor=black,
+    citecolor=black,
+    pdftitle={Laporan Praktikum PPG Pertemuan 3},
+    pdfpagemode=UseOutlines,
+    breaklinks=true
+}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+\renewcommand{\contentsname}{Daftar Isi}
+\renewcommand{\bibname}{Daftar Pustaka}
+\renewcommand{\thechapter}{}
+\renewcommand{\chaptername}{}
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\renewcommand{\cftchapdotsep}{\cftdotsep}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftchapdotsep}}
+\setlength{\cftchapindent}{0em}
+\setlength{\cftsecindent}{2em}
+\setlength{\cftsubsecindent}{4em}
+\setlength{\cftchapnumwidth}{0em}
+\setlength{\cftsecnumwidth}{2.5em}
+\setlength{\cftsubsecnumwidth}{3.2em}
+\renewcommand{\cftchappresnum}{}
+\renewcommand{\cftchapaftersnum}{}
+\newcommand{\tocboldsection}[1]{%
+  \protect\renewcommand{\protect\cftchapfont}{\protect\bfseries}%
+  #1%
+  \protect\renewcommand{\protect\cftchapfont}{}%
+}
+
+%======================================================================
+% AWAL DOKUMEN
+%======================================================================
+\begin{document}
+
+% Halaman Judul
+\newgeometry{left=3cm, right=2.5cm, top=2.5cm, bottom=3cm}
+\begin{titlingpage}
+\begin{spacing}{1}
+\begin{center}
+\vspace*{0.2cm}
+{\large \textbf{\MakeUppercase{Laporan Praktikum}}} \\[0.4cm]
+{\large \textbf{\MakeUppercase{PRAKTIKUM PENGEMBANGAN GAME}}} \\[0.4cm]
+{\large \textbf{\MakeUppercase{Pertemuan 3}}} \\[0.4cm]
+{\large \textbf{\MakeUppercase{VARIABLE \& CONDITION}}} \\[1.5cm]
+
+\includegraphics[height=7cm]{images/UGM.png} \\[0.7cm]
+
+{\normalsize \textbf{Disusun oleh:}} \\[0.4cm]
+\begin{tabular}{@{}l l @{}}
+  \textbf{Nama}           & : Hafidz Rizqullah Prasetya \\
+  \textbf{NIM}            & : 24/535493/SV/24243 \\
+  \textbf{NIU}            & : 535493 \\
+  \textbf{Kelas}          & : PL5A1 \\
+  \textbf{Dosen Pengampu} & : Yusron Fuadi, S.Sn., M.Sn. \\
+  \textbf{Asisten}        & : Ezra Bariq Rizqullah / Ikhwan Hanif Firdaus \\
+\end{tabular} \\[1.2cm]
+
+{\normalsize \textbf{PROGRAM STUDI D-IV}} \\[0.2cm]
+{\normalsize \textbf{TEKNOLOGI REKAYASA PERANGKAT LUNAK}} \\[0.2cm]
+{\normalsize \textbf{DEPARTEMEN TEKNIK ELEKTRO DAN INFORMATIKA}} \\[0.2cm]
+{\normalsize \textbf{SEKOLAH VOKASI}} \\[0.2cm]
+{\normalsize \textbf{UNIVERSITAS GADJAH MADA}} \\[0.2cm]
+{\normalsize \textbf{YOGYAKARTA}} \\[0.2cm]
+{\normalsize \textbf{2026}} \\[1.2cm]
+\end{center}
+\end{spacing}
+\end{titlingpage}
+\restoregeometry
+
+\thispagestyle{empty}
+\clearpage
+\stepcounter{page}
+\thispagestyle{empty}
+
+% --- Daftar Isi ---
+\addcontentsline{toc}{chapter}{Daftar Isi}
+\tableofcontents
+\clearpage
+
+% Mengatur penomoran halaman menjadi arab dan mulai dari 3
+\pagenumbering{arabic}
+\setcounter{page}{3}
+
+\chapter[Tujuan Praktikum]{Tujuan Praktikum}
+\begin{enumerate}
+   \item Mahasiswa mampu membuat project baru memakai template Third Person dengan format nama \textbf{NAMA\_NIU\_PPG} sebagai pengganti template IntroToUnreal yang memiliki bug rigging \cite{modul3}.
+   \item Mahasiswa mampu menyiapkan level dasar yang meliputi folder Maps, Level baru, Env.\ Light Mixer, Landscape, dan Player Start \cite{modul3,epic-levels}.
+   \item Mahasiswa mampu membuat Blueprint \texttt{BP\_Box}, memahami event BeginPlay dan Event Tick, serta menambahkan variabel boolean dan mengenal Struct Variable \cite{modul3,epic-variables}.
+   \item Mahasiswa mampu menerapkan logika kondisional lewat node Branch, input Keyboard R, serta node flow control lain, lalu mengaplikasikan if/else untuk mengubah scale mesh secara real-time menuju \textit{scale target} 0.1 \cite{modul3,epic-flow}.
+\end{enumerate}
+\clearpage
+
+\chapter{Dasar Teori}
+
+\section{Project Third Person dan Setup Level Baru}
+Project praktikum kali ini saya buat dari template \textbf{Third Person} pada kategori Games di Unreal Project Browser. Template IntroToUnreal yang dipakai pada pertemuan 2 sengaja ditinggalkan karena ada bug pada 3D model karakter yang bisa menghambat materi Rigging/Retargeting berikutnya \cite{modul3}. Project Name saya isi dengan format \textbf{NAMA\_NIU\_PPG}, sehingga project saya bernama \texttt{HAFIDZ\_535493\_PPG}.
+
+Berbeda dari pertemuan 2 yang langsung membuka tutorial interaktif, project Third Person dimulai dari level contoh yang relatif kosong. Karena itu modul meminta saya menyiapkan level sendiri: membuat folder \textbf{Maps} di Content Drawer, lalu membuat file \textbf{Level} baru di dalamnya lewat klik kanan \cite{modul3}. Level di Unreal adalah wadah berisi semua actor (mesh, light, camera, Player Start) yang tampil di scene, dan setiap Level tersimpan sebagai file \texttt{.umap} \cite{epic-levels}.
+
+Langkah berikutnya adalah pencahayaan dasar. Saya membuka Level baru, klik menu \textbf{Windows} di kiri atas editor, lalu membuka \textbf{Env.\ Light Mixer}. Di window tersebut saya menekan semua tombol \textbf{Create} (Sky Light, Directional Light, Sky Atmosphere, Volumetric Cloud, Exponential Height Fog) supaya level langsung punya setup pencahayaan lingkungan yang otomatis dan realistis \cite{modul3}.
+
+Terakhir, saya menambahkan terrain dan titik spawn. Lewat \textbf{Landscape Mode} saya membuat landscape berukuran \textbf{7x7 Quads, 8x8 Component, Section 1x1}, mengganti gamemode ke \textbf{BP\_FirstPersonGameMode}, lalu menaruh \textbf{Player Start} ke Level \cite{modul3}. Player Start adalah actor kecil berbentuk bendera yang menandai posisi dan arah spawn karakter saat game dijalankan, dan ikonnya berada di sebelah kiri tombol Play pada toolbar atas \cite{epic-place}.
+
+\section{Blueprint, Event BeginPlay, dan Event Tick}
+Sebelum menulis logika, saya menyiapkan folder \textbf{Blueprints} sebagai tempat semua file kode. File Blueprint memakai prefix \textbf{BP\_} sesuai konvensi penamaan resmi Epic Games \cite{epic-naming}. Blueprint yang saya buat bernama \texttt{BP\_Box}. Karena Blueprint pada dasarnya kosong (cuma titik pivot), saya menekan tombol \textbf{+ Add} di panel Components lalu menambahkan komponen \textbf{Cube} supaya Blueprint punya wujud kotak saat di-spawn ke map \cite{modul3}.
+
+Kode di Unreal Engine 5 tidak bisa jalan tanpa \textbf{event} sebagai pemicu. Dua event bawaan yang selalu ada di tab \textbf{Event Graph} adalah \textbf{Event BeginPlay} yang dieksekusi satu kali saat game atau objek dimulai, dan \textbf{Event Tick} yang dieksekusi terus-menerus setiap frame \cite{modul3}. Cara membuktikan graph saya jalan cukup sederhana: Blueprint di-drag and drop ke dalam level, lalu node \textbf{Print String} dipasang. Kalau teks debug muncul di layar saat Play, berarti kode di Event Graph berhasil dieksekusi \cite{modul3,epic-unreal}.
+
+Actor sendiri adalah objek dasar yang bisa ditempatkan di level, sedangkan Pawn/Character adalah actor yang bisa dikendalikan input pemain \cite{epic-actors}. Pemahaman ini membantu saya membaca hubungan antara BP\_Box yang saya buat dan karakter Third Person yang dipakai untuk menguji input keyboard nantinya.
+
+\section{Variabel di Blueprint}
+Variabel di Blueprint menyimpan data yang dipakai logika. Pilihannya banyak, mulai dari tipe primitif seperti Boolean, Integer, Float, String, dan Vector, sampai tipe tambahan seperti \textbf{Transform} yang otomatis membungkus tiga variabel sekaligus (Location, Rotation, Scale), \textbf{Enum}, dan \textbf{user defined class} \cite{modul3,epic-variables}. Variabel baru saya buat dari panel \textbf{My Blueprint} dengan mengklik ikon \textbf{(+)}, lalu tipe datanya dipilih dari daftar drop-down. Instruksi modul meminta saya menambahkan variabel bertipe \textbf{Boolean} pada \texttt{BP\_Box} sebagai bahan percobaan Branch \cite{modul3}.
+
+Selain variabel tunggal, modul juga memperkenalkan \textbf{Struct Variable}. Struct adalah child Blueprint yang menampung beberapa variabel beda jenis dalam satu wadah, mirip List atau Dictionary kompleks di Python \cite{modul3}. Materi ini baru sekadar pengenalan dan dijanjikan dibahas lebih dalam pada pertemuan berikutnya, jadi saya cukup memahami idenya: satu Struct bisa menyimpan String, Integer, dan Boolean sekaligus dalam satu paket.
+
+\section{Branch dan Kontrol Alur}
+Node baru ditambahkan dengan \textbf{klik kanan} pada area kosong Event Graph lalu mengetik kata kunci seperti ``if'', ``get \textless nama\_variabel\textgreater'', ``set \textless nama\_variabel\textgreater'', atau ``print string'' \cite{modul3}. Navigasi kanvasnya memakai klik kanan yang ditahan sambil menggerakkan mouse (panning), supaya graph yang panjang tetap gampang dijelajahi.
+
+Node \textbf{Branch} adalah padanan \textit{if} pada pseudo-code. Node ini punya satu pin eksekusi masuk, satu pin kondisi bertipe Boolean, dan dua pin eksekusi keluar yaitu \textbf{True} dan \textbf{False} \cite{modul3,epic-flow}. Alur cuma lewat ke salah satu cabang sesuai nilai kondisinya.
+
+Contoh paling sederhana di modul memakai \textbf{Event Tick} yang disambung ke logika penekanan tombol. Saya mengetik ``keyboard'' pada menu tambah node untuk memunculkan \textbf{Keyboard R} dari kategori Input Events \cite{epic-input}. Pin Pressed/Released dari node tersebut dipakai untuk mengubah variabel Boolean lewat node \textbf{Set}, lalu variabel itu dibaca lewat node \textbf{Get} dan dimasukkan ke pin kondisi Branch. Node \textbf{Not Boolean} saya pakai untuk membalik nilai logika. Dari pin True dan False, dua kabel eksekusi saya sambungkan ke dua node \textbf{Print String} berbeda, sehingga teks yang tercetak di layar berganti tergantung tombol R sedang ditekan atau tidak \cite{modul3}.
+
+Di luar Branch, Unreal masih punya node flow control lain: \textbf{Switch} (satu input, banyak output Case untuk mencocokkan nilai), \textbf{Do Once} (eksekusi cuma sekali sampai di-reset), \textbf{Flip Flop} (output A dan B aktif bergantian), dan \textbf{Gate} (pintu Open/Close/Toggle yang mengatur apakah alur boleh lewat) \cite{modul3,epic-flow}. Keempatnya ditandai opsional dan boleh dipelajari mandiri kalau waktu praktikum tidak cukup.
+
+\section{Penerapan If/Else Real-Time dan Konvensi Penamaan}
+Tugas praktikum meminta saya mengaplikasikan if/else untuk mengubah scale, rotasi, atau lokasi mesh \textbf{secara real-time} lewat kode pada Event Tick \texttt{BP\_Box}. Caranya: saya menambahkan variabel float bernama \textbf{scale target} dengan default value \textbf{0.1}, lalu Event Tick dipakai untuk menggeser nilai Scale mesh menuju target tersebut lewat node matematika seperti pengurangan atau Lerp \cite{modul3}. Satu trik penting dari modul: \textbf{klik kanan pada pin konektor} operasi bilangan untuk mengonversi tipe data (misalnya Vector ke Float), supaya operasi matematikanya tidak error merah dan bisa jalan \cite{modul3}.
+
+Modul memberi catatan jujur bahwa cara ini \textbf{bukan best practice} dan cuma untuk keperluan praktikum. Mengubah transformasi di dalam Event Tick tanpa Delta Time atau Timeline membuat pergerakan tidak konsisten di beda frame rate dan membebani performa \cite{modul3}. Menjalankan game dari editor sendiri bisa dilakukan lewat tombol Play atau menjalankan project standalone untuk pengujian yang lebih bersih \cite{epic-running}.
+
+Supaya project tetap rapi, saya mengikuti konvensi penamaan resmi Epic: prefix \texttt{BP\_} untuk Blueprint, \texttt{M\_} untuk Material, \texttt{T\_} untuk Texture, dan seterusnya \cite{epic-naming}. Kebiasaan kecil ini membuat aset gampang dicari saat project membesar.
+
+\clearpage
+
+\chapter[\tocboldsection{Hasil dan Pembahasan}]{Hasil dan Pembahasan}
+
+Bab ini berisi dokumentasi praktikum Variable \& Condition sesuai Modul Pertemuan 3. Semua langkah saya kerjakan di Unreal Engine 5.8 pada project \texttt{HAFIDZ\_535493\_PPG} yang dibuat dari template Third Person, dan tiap langkah saya dokumentasikan dengan screenshot berikut keterangan singkatnya.
+
+\section{Dokumentasi Praktikum}
+
+\subsection{Basic Setup: Project, Maps, Level, dan Lighting}
+
+\begin{enumerate}
+    \item \textbf{Membuat project Third Person bernama HAFIDZ\_535493\_PPG.} Saya membuka Unreal Project Browser, memilih kategori \textbf{Games} dan template \textbf{Third Person}, lalu mengisi Project Name dengan format NAMA\_NIU\_PPG. Template ini saya pilih karena template IntroToUnreal memiliki bug pada 3D model karakter yang bisa menghambat materi Rigging/Retargeting.
+
+\begin{figure}[H]
+    \centering
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-01-project-thirdperson.png}}
+    \caption{Jendela New Project: kategori Games, template Third Person, dan Project Name HAFIDZ\_535493\_PPG.}
+    \label{fig:ss-project}
+\end{figure}
+
+    \item \textbf{Membuat folder Maps dan Level baru.} Di Content Drawer saya klik kanan area kosong untuk membuat folder \textbf{Maps}, lalu di dalam folder tersebut saya klik kanan lagi dan membuat file \textbf{Level} baru sebagai arena kerja praktikum ini.
+
+\begin{figure}[H]
+    \centering
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-02-maps-level.png}}
+    \caption{Folder Maps di Content Drawer beserta file Level baru di dalamnya.}
+    \label{fig:ss-maps}
+\end{figure}
+
+    \item \textbf{Membuat pencahayaan dasar lewat Env.\ Light Mixer.} Saya membuka Level baru, klik menu \textbf{Windows} di kiri atas editor, lalu membuka \textbf{Env.\ Light Mixer}. Di window tersebut saya menekan semua tombol \textbf{Create} supaya Sky Light, Directional Light, Sky Atmosphere, Volumetric Cloud, dan Exponential Height Fog langsung terpasang.
+
+\begin{figure}[H]
+    \centering
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-03-env-light-mixer.png}}
+    \caption{Panel Env.\ Light Mixer dengan seluruh opsi pencahayaan lingkungan yang sudah di-Create.}
+    \label{fig:ss-lightmixer}
+\end{figure}
+
+    \item \textbf{Menambahkan Landscape dan Player Start.} Saya masuk \textbf{Landscape Mode} dan membuat landscape berukuran \textbf{7x7 Quads, 8x8 Component, Section 1x1}, mengganti gamemode ke \textbf{BP\_FirstPersonGameMode}, lalu menaruh \textbf{Player Start} ke Level sebagai titik spawn karakter. Ikon Player Start saya ambil dari sebelah kiri tombol Play.
+
+\begin{figure}[H]
+    \centering
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-04-landscape-playerstart.png}}
+    \caption{Landscape 7x7 di Level beserta actor Player Start sebagai titik spawn pemain.}
+    \label{fig:ss-landscape}
+\end{figure}
+\end{enumerate}
+
+\subsection{Blueprint, Event, dan Variabel}
+
+\begin{enumerate}
+    \item \textbf{Membuat BP\_Box berisi komponen Cube.} Saya membuat folder \textbf{Blueprints}, membuat Blueprint Class baru bernama \textbf{BP\_Box}, lalu di panel Components menekan \textbf{+ Add} dan menambahkan komponen \textbf{Cube} supaya Blueprint terlihat sebagai kotak saat di-spawn ke map.
+
+\begin{figure}[H]
+    \centering
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-05-bp-box-cube.png}}
+    \caption{Editor BP\_Box: folder Blueprints, komponen Cube yang ditambahkan lewat tombol Add.}
+    \label{fig:ss-bpbox}
+\end{figure}
+
+    \item \textbf{Mencoba Event BeginPlay, Event Tick, dan Print String.} Di tab \textbf{Event Graph} saya memakai dua node merah bawaan, yaitu \textbf{Event BeginPlay} (jalan sekali) dan \textbf{Event Tick} (jalan tiap frame). Saya men-drag and drop BP\_Box ke dalam level dan memasang node \textbf{Print String}; teks debug yang muncul di layar membuktikan graph saya berjalan.
+
+\begin{figure}[H]
+    \centering
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-06-event-beginplay-tick.png}}
+    \caption{Event Graph BP\_Box: Event BeginPlay dan Event Tick beserta teks debug Print String di viewport.}
+    \label{fig:ss-event}
+\end{figure}
+
+    \item \textbf{Menambahkan variabel boolean pada BP\_Box.} Dari panel \textbf{My Blueprint} saya mengklik ikon \textbf{(+)} untuk membuat variabel baru bertipe \textbf{Boolean}. Daftar drop-down tipenya menampilkan pilihan primitif (Boolean, Integer, Float, String, Vector) sampai tipe kompleks seperti Transform, Enum, dan Class Reference.
+
+\begin{figure}[H]
+    \centering
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-07-variabel-boolean.png}}
+    \caption{Panel My Blueprint: variabel Boolean baru di BP\_Box beserta daftar tipe data yang tersedia.}
+    \label{fig:ss-variable}
+\end{figure}
+\end{enumerate}
+
+\subsection{Branch dan Input Keyboard}
+
+\begin{enumerate}
+    \item \textbf{Menambahkan node lewat klik kanan.} Saya klik kanan area kosong Event Graph dan mengetik kata kunci seperti ``branch'', ``get'', ``set'', dan ``print string'' untuk memunculkan node yang saya butuhkan. Navigasi kanvas saya lakukan dengan menahan klik kanan sambil menggerakkan mouse.
+
+\begin{figure}[H]
+    \centering
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-08-add-node-branch.png}}
+    \caption{Menu klik kanan tambah node di Event Graph dengan kata kunci pencarian Branch.}
+    \label{fig:ss-addnode}
+\end{figure}
+
+    \item \textbf{Merangkai Branch dengan Keyboard R.} Saya menyambungkan \textbf{Event Tick} ke node \textbf{Keyboard R} (kategori Input Events, dicari dengan keyword ``keyboard''). Pin Pressed/Released-nya saya pakai untuk mengubah variabel Boolean lewat node \textbf{Set}, lalu variabel itu saya baca lewat node \textbf{Get} dan saya masukkan ke pin kondisi \textbf{Branch}. Node \textbf{Not Boolean} saya pasang untuk membalik logika, dan dari pin True/False saya sambungkan dua node \textbf{Print String} berbeda supaya teks di layar berganti mengikuti status tombol R.
+
+\begin{figure}[H]
+    \centering
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-09-rangkaian-keyboard-branch.png}}
+    \caption{Untaian logika Event Tick, Keyboard R, Set/Get Boolean, Not, Branch, dan dua Print String.}
+    \label{fig:ss-keyboard}
+\end{figure}
+\end{enumerate}
+
+\subsection{Tugas: Aplikasi If/Else Pengubah Scale Real-Time}
+
+\begin{enumerate}
+    \item \textbf{Menambahkan variabel float scale target 0.1.} Sesuai instruksi tugas, saya menambahkan variabel float bernama \textbf{scale target} pada \texttt{BP\_Box} dengan default value \textbf{0.1} sebagai angka tujuan perubahan skala mesh.
+
+\begin{figure}[H]
+    \centering
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-10-scale-target.png}}
+    \caption{Variabel float scale target dengan default value 0.1 di panel My Blueprint milik BP\_Box.}
+    \label{fig:ss-scaletarget}
+\end{figure}
+
+    \item \textbf{Merangkai Event Tick pengubah scale.} Saya mengubah kode pada Event Tick \texttt{BP\_Box} supaya nilai Scale mesh bergeser real-time menuju \textit{scale target} lewat node matematika (pengurangan/Lerp). Pada pin konektor operasi bilangan saya \textbf{klik kanan} untuk mengonversi return value scale ke float, persis seperti gambar modul, supaya tidak error merah. Saya sadar cara ini bukan best practice karena mengubah transformasi tiap frame tanpa Delta Time atau Timeline, tapi instruksi modul memang meminta demikian untuk keperluan praktikum.
+
+\begin{figure}[H]
+    \centering
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-11-tugas-tick-scale.png}}
+    \caption{Rangkaian Event Tick tugas: Scale mesh digeser real-time menuju 0.1 dengan konversi pin ke float.}
+    \label{fig:ss-tickscale}
+\end{figure}
+\end{enumerate}
+
+\section{Hasil Akhir}
+Di akhir praktikum, project \texttt{HAFIDZ\_535493\_PPG} berhasil saya siapkan dari template Third Person lengkap dengan folder Maps, Level baru, pencahayaan Env.\ Light Mixer, Landscape 7x7, dan Player Start. Blueprint \texttt{BP\_Box} berisi komponen Cube, variabel Boolean, dan variabel float \textit{scale target} 0.1. Logika Branch dengan input Keyboard R mencetak dua teks berbeda sesuai status tombol, dan rangkaian tugas mengubah Scale mesh secara real-time menuju 0.1 saat game di-Play.
+
+\begin{figure}[H]
+    \centering
+    \customfbox{\includegraphics[width=0.9\textwidth]{images/ss-12-hasil-akhir-play.png}}
+    \caption{Hasil akhir saat Play: skala BP\_Box berubah menuju 0.1 mengikuti logika Branch dan tombol R.}
+    \label{fig:hasil-akhir}
+\end{figure}
+
+Hasil ini menunjukkan saya bisa mengikuti instruksi modul dari pembuatan project sampai aplikasi if/else real-time, sesuai ketentuan Format Tugas Modul 3 \cite{modul3}. Terakhir, semuanya saya simpan dengan \texttt{CTRL+S}.
+
+\clearpage
+
+\chapter{Kesimpulan}
+Dari praktikum Pertemuan 3 Variable \& Condition, saya simpulkan bahwa template Third Person adalah titik awal yang tepat untuk materi logika karena bebas dari bug rigging IntroToUnreal. Level kerja saya siapkan sendiri dari folder Maps, file Level baru, pencahayaan Env.\ Light Mixer, Landscape 7x7, dan Player Start sebagai titik spawn.
+
+Saya juga memahami alur kerja Blueprint: file beraudit prefix \texttt{BP\_} dengan komponen Cube, event BeginPlay yang jalan sekali dan Event Tick yang jalan tiap frame, serta variabel Boolean yang saya buat dari panel My Blueprint. Node Branch terbukti berfungsi sebagai \textit{if} dengan dua cabang True/False, dan input Keyboard R lengkap dengan Set/Get serta Not Boolean membuat teks debug berganti sesuai tombol yang saya tekan.
+
+Untuk tugasnya, variabel float \textit{scale target} 0.1 dan konversi pin konektor ke float membuat Scale mesh bergeser real-time tanpa error. Saya mencatat cara ini bukan best practice tanpa Delta Time atau Timeline, tapi cukup untuk membuktikan konsep if/else di Blueprint. Node Switch, Do Once, Flip Flop, dan Gate saya pelajari mandiri sebagai bekal flow control berikutnya.
+
+\clearpage
+\addcontentsline{toc}{chapter}{Daftar Pustaka}
+\renewcommand{\bibname}{Daftar Pustaka}
+\begin{thebibliography}{99}
+    \bibitem{modul3} Modul Praktikum Pengembangan Game Pertemuan 3 --- Variable \& Condition, T.A. 2026/2027. Semester Gasal, Universitas Gadjah Mada.
+    \bibitem{epic-unreal} Epic Games, ``Unreal Engine 5 Documentation'', 2026. [Online]. Tersedia: \url{https://dev.epicgames.com/documentation/unreal-engine/}.
+    \bibitem{epic-levels} Epic Games, ``Levels in Unreal Engine'', 2026. [Online]. Tersedia: \url{https://dev.epicgames.com/documentation/en-us/unreal-engine/levels-in-unreal-engine}.
+    \bibitem{epic-place} Epic Games, ``Place Actors and Geometry in Unreal Engine'', 2026. [Online]. Tersedia: \url{https://dev.epicgames.com/documentation/en-us/unreal-engine/place-actors-and-geometry-in-unreal-engine}.
+    \bibitem{epic-variables} Epic Games, ``Blueprint Variables in Unreal Engine'', 2026. [Online]. Tersedia: \url{https://dev.epicgames.com/documentation/en-us/unreal-engine/blueprint-variables-in-unreal-engine}.
+    \bibitem{epic-flow} Epic Games, ``Flow Control in Unreal Engine'', 2026. [Online]. Tersedia: \url{https://dev.epicgames.com/documentation/en-us/unreal-engine/flow-control-in-unreal-engine}.
+    \bibitem{epic-input} Epic Games, ``Input in Unreal Engine'', 2026. [Online]. Tersedia: \url{https://dev.epicgames.com/documentation/en-us/unreal-engine/input-in-unreal-engine}.
+    \bibitem{epic-actors} Epic Games, ``Actors in Unreal Engine'', 2026. [Online]. Tersedia: \url{https://dev.epicgames.com/documentation/en-us/unreal-engine/actors-in-unreal-engine}.
+    \bibitem{epic-running} Epic Games, ``Running Unreal Engine'', 2026. [Online]. Tersedia: \url{https://dev.epicgames.com/documentation/en-us/unreal-engine/running-unreal-engine}.
+    \bibitem{epic-naming} Epic Games, ``Recommended Asset Naming Conventions in Unreal Engine Projects'', 2026. [Online]. Tersedia: \url{https://dev.epicgames.com/documentation/en-us/unreal-engine/recommended-asset-naming-conventions-in-unreal-engine-projects}.
+\end{thebibliography}
+
+\end{document}
